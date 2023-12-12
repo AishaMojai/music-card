@@ -1,17 +1,12 @@
-var audio = new Audio('https://youtu.be/Wy-v-FgiUD8?t=13');
-audio.volume = 0.1;
-audio.autoplay = true;
+const images = document.querySelectorAll('.image-slide');
+let currentImageIndex = 0;
 
-$('.trigger').click(function() {
-  if (audio.paused == false) {
-      audio.pause();
-      $('.fa-play').show();
-      $('.fa-pause').hide();
-      $('.music-card').removeClass('playing');
-  } else {
-      audio.play();
-      $('.fa-pause').show();
-      $('.fa-play').hide();
-      $('.music-card').addClass('playing');
-  }
-});
+function slideImages() {
+  currentImageIndex = (currentImageIndex + 1) % images.length;
+  const translateValue = `translateY(${-currentImageIndex * 100}%)`;
+  images.forEach(image => {
+    image.style.transform = translateValue;
+  });
+}
+
+setInterval(slideImages, 3000);
